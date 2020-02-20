@@ -73,9 +73,13 @@ export const signUpHttp = signUpData => dispatch => {
 
   signUp(signUpData)
     .then(data => {
-      console.log(data);
       dispatch(setSignUpPending(false));
-      dispatch(setSignUpSuccess(true));
+      if (data.accessToken) {
+        localStorage.setItem("accessToken", data.accessToken);
+        dispatch(setSignUpSuccess(true));
+      } else {
+        dispatch(setSignUpError);
+      }
     })
     .catch(error => {
       dispatch(setSignUpError(error));
