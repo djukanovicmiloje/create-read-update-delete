@@ -14,7 +14,7 @@ export const setPostCreationSuccess = post => ({
   post
 });
 
-export const setPostCreationErrorr = error => ({
+export const setPostCreationError = error => ({
   type: SET_POST_CREATION_ERROR,
   error
 });
