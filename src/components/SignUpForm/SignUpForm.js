@@ -1,7 +1,8 @@
 import React from "react";
-import { signUpHttp as signUp } from "../../reducers/signUpReducer";
+import singUpDispatcher from "../../actions/signup/dispatcher";
 
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -41,8 +42,11 @@ class SignUpForm extends React.Component {
 
   render() {
     const { name, lastName, email, password } = this.state;
+    const { isSignUpPending, isSignUpSuccess, signUpError } = this.props;
+
     return (
       <div>
+        {isSignUpSuccess && <Redirect to="/posts" />}
         <h1>Sign Up</h1>
         <input
           onChange={e => this.onInputChange(e)}
@@ -82,13 +86,13 @@ class SignUpForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isSignUpPending: state.isSignUpPending,
-  isSignUpSuccess: state.isSignUpSuccess,
-  error: state.signUpError
+  isSignUpPending: state.signup.isSignUpPending,
+  isSignUpSuccess: state.signup.isSignUpSuccess,
+  signUpError: state.signup.signUpError
 });
 
 const mapDispatchToProps = dispatch => ({
-  signUp: signUpData => dispatch(signUp(signUpData)) //OVO MI NIJE JASNO STO POSTO KAKO RADI
+  signUp: signUpData => dispatch(singUpDispatcher(signUpData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);

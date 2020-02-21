@@ -5,7 +5,7 @@ const headers = {
 
 const url = "https://crud-api.hypetech.xyz/v1/auth/login";
 
-const login = loginData =>
+export const login = loginData =>
   fetch(url, {
     method: "POST",
     headers: headers,
@@ -20,5 +20,3 @@ export const signUp = signUpData =>
     headers: headers,
     body: JSON.stringify(signUpData)
   }).then(res => res.json());
-
-export default login;

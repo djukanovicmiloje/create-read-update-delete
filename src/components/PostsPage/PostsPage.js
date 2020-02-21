@@ -1,12 +1,9 @@
 import React from "react";
-import { postsDispatcher } from "../../reducers/postsReducer";
+import postsDispatcher from "../../actions/posts/dispatcher";
 import { connect } from "react-redux";
+import PostCard from "./PostCard/PostCard";
 
 class PostsPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.fetchPosts();
   }
@@ -14,30 +11,25 @@ class PostsPage extends React.Component {
   render() {
     const { arePostsPending, posts, error } = this.props;
 
-    console.log("ALOOOO", posts);
     if (arePostsPending) {
       return <div>Loading...</div>;
     }
-    debugger;
 
-    return <div>{JSON.stringify(posts)}</div>;
-    //return posts.map(post => <div>{JSON.stringify(post)}</div>);
-    //return posts.map(post => <div>{post.body}</div>);
+    if (error) {
+      return <div>Something went wrong ...</div>;
+    }
+
+    return posts.map(post => <PostCard post={post} />);
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    arePostsPending: state.arePostsPending,
-    posts: state.posts,
-    error: state.error
+    arePostsPending: state.posts.arePostsLoading,
+    posts: state.posts.posts,
+    error: state.posts.error
   };
 };
-
-// const mapDispatchToProps = dispatch => ({
-//   fetchPosts: () => dispatch(postsDispatcher())
-// });
 
 const mapDispatchToProps = dispatch => ({
   fetchPosts: () => dispatch(postsDispatcher())

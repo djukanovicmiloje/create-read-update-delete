@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { loginHttp as login } from "../../reducers/loginReducer";
+import loginDispatcher from "../../actions/login/dispatcher";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -69,13 +69,13 @@ class LoginForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isLoginPending: state.isLoginPending,
-  isLoginSuccess: state.isLoginSuccess,
-  loginError: state.loginError
+  isLoginPending: state.login.isLoginPending,
+  isLoginSuccess: state.login.isLoginSuccess,
+  loginError: state.login.loginError
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: loginData => dispatch(login(loginData))
+  login: loginData => dispatch(loginDispatcher(loginData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
