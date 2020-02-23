@@ -6,8 +6,8 @@ const myPostsDispatcher = () => dispatch => {
 
 	fetchMyPosts()
 		.then(posts => {
-			dispatch(setMyPostsPending(false));
 			dispatch(setMyPostsSuccess(posts));
+			dispatch(setMyPostsPending(false));
 		})
 		.catch(error => {
 			dispatch(setMyPostsError(error));

@@ -1,0 +1,16 @@
+.post_card {
+	img {
+		width: 100%;
+		display: block;
+	}
+	h2 {
+		color: purple;
+	}
+	width: 300px;
+
+	padding: 30px;
+}
+
+.posts_container {
+	display: flex;
+}

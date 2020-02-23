@@ -11,9 +11,10 @@ const headers = {
 
 import jwtDecode from 'jwt-decode';
 
-const userId = jwtDecode(accessToken).userId;
+//const tokenDecoded = jwtDecode(accessToken);
+//const userId = tokenDecoded.id;
 
-const URL = `https://crud-api.hypetech.xyz/v1/posts?userId=145`;
+const URL = `https://crud-api.hypetech.xyz/v1/posts?userId=146`;
 
 const fetchMyPosts = () =>
 	fetch(URL, {

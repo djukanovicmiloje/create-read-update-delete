@@ -13,23 +13,23 @@ const myPostsReducer = (
 	action
 ) => {
 	switch (action.type) {
-		case SET_MY_POSTS_PENDING:
-			return {
-				...state,
-				areMyPostsPending: action.areMyPostsPending
-			};
-		case SET_MY_POSTS_SUCCESS:
-			return {
-				...state,
-				myPosts: action.myPosts
-			};
-		case SET_MY_POSTS_ERROR:
-			return {
-				...state,
-				error: action.error
-			};
-		default:
-			return state;
+	case SET_MY_POSTS_PENDING:
+		return {
+			...state,
+			areMyPostsPending: action.areMyPostsPending
+		};
+	case SET_MY_POSTS_SUCCESS:
+		return {
+			...state,
+			myPosts: action.myPosts
+		};
+	case SET_MY_POSTS_ERROR:
+		return {
+			...state,
+			error: action.error
+		};
+	default:
+		return state;
 	}
 };
 

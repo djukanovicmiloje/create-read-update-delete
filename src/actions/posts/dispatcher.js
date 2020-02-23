@@ -1,15 +1,13 @@
-import {setPostsLoading, setPosts, setPostsError} from './creators';
+import { setPosts, setPostsError, setPostsFetched } from './creators';
 import fetchPosts from '../../services/fetchPosts';
 
-const postsDispatcher = () => (dispatch) => {
-	dispatch(setPostsLoading(true));
-
+const postsDispatcher = () => dispatch => {
 	fetchPosts()
-		.then((posts) => {
+		.then(posts => {
 			dispatch(setPosts(posts));
-			dispatch(setPostsLoading(false));
+			dispatch(setPostsFetched(true));
 		})
-		.catch((error) => {
+		.catch(error => {
 			dispatch(setPostsError(error));
 			dispatch(setPostsLoading(false));
 		});

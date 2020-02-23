@@ -25,49 +25,41 @@ class CreatePostPage extends Component {
 	render() {
 		return (
 			<div>
+				<h1>Create Post</h1>
+				<input onChange={e => this.onInputChange(e)} type="text" name="title" placeholder="title" />
+				<br />
 				<input
-					onChange={(e) => this.onInputChange(e)}
-					type="text"
-					name="title"
-					placeholder="title"
-				/>
-				<input
-					onChange={(e) => this.onInputChange(e)}
+					onChange={e => this.onInputChange(e)}
 					type="text"
 					name="subtitle"
 					placeholder="subtitle"
 				/>
+				<br />
 				<input
-					onChange={(e) => this.onInputChange(e)}
+					onChange={e => this.onInputChange(e)}
 					type="text"
 					name="imageUrl"
 					placeholder="imageUrl"
 				/>
-				<input
-					onChange={(e) => this.onInputChange(e)}
-					type="text"
-					name="text"
-					placeholder="text"
-				/>
-				<input
-					onChange={(e) => this.onInputChange(e)}
-					type="checkbox"
-					name="isPublic"
-				/>
+				<br />
+				<input onChange={e => this.onInputChange(e)} type="text" name="text" placeholder="text" />
+				<br />
+				<input onChange={e => this.onInputChange(e)} type="checkbox" name="isPublic" />
+				<br />
 				<button onClick={() => this.onCreatePostClick()}>Create Post</button>
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	isPostCreationPending: state.createPost.isPostCreationPending,
 	post: state.createPost.post,
-	error: state.createPost.error,
+	error: state.createPost.error
 });
 
-const mapDispatchToProps = (dispatch) => ({
-	createPost: (postData) => dispatch(createPostDispatcher(postData)),
+const mapDispatchToProps = dispatch => ({
+	createPost: postData => dispatch(createPostDispatcher(postData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePostPage);
