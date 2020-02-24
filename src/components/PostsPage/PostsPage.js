@@ -3,10 +3,12 @@ import postsDispatcher from '../../actions/posts/dispatcher';
 import { connect } from 'react-redux';
 import PostCard from './PostCard/PostCard';
 import Header from '../../containers/Header';
+import commentsDispatcher from '../../actions/fetchComments/dispatcher';
 
 class PostsPage extends React.Component {
 	componentDidMount() {
 		this.props.fetchPosts();
+		this.props.fetchComments();
 	}
 
 	render() {
@@ -45,7 +47,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-	fetchPosts: () => dispatch(postsDispatcher())
+	fetchPosts: () => dispatch(postsDispatcher()),
+	fetchComments: () => dispatch(commentsDispatcher())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsPage);

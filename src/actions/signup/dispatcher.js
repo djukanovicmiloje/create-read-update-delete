@@ -12,6 +12,7 @@ const signUpDispatcher = signUpData => dispatch => {
 				storeAccessToken(data.accessToken);
 				dispatch(setSignUpSuccess(true));
 			} else {
+				console.log(data);
 				dispatch(setSignUpError(data));
 			}
 		})

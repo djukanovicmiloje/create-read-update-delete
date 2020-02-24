@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import loginDispatcher from '../../actions/login/dispatcher';
+import { Redirect } from 'react-router';
 
-class LoginForm extends React.Component {
+class LoginForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -39,6 +40,7 @@ class LoginForm extends React.Component {
 
 		return (
 			<div>
+				{isLoginSuccess && <Redirect to="/posts" />}
 				<h1>Log In</h1>
 				<input
 					onChange={e => this.onInputChange(e)}
@@ -61,7 +63,7 @@ class LoginForm extends React.Component {
 				<div className="message">
 					{isLoginPending && <div>Please wait...</div>}
 					{isLoginSuccess && <div>Success.</div>}
-					{loginError && <div>{loginError.message}</div>}
+					{loginError && <div>{loginError}</div>}
 				</div>
 			</div>
 		);

@@ -9,26 +9,26 @@ const postsReducer = (
 	action
 ) => {
 	switch (action.type) {
-		case SET_POSTS_FETCHED:
-			return {
-				...state,
-				arePostsFetched: action.arePostsFetched
-			};
+	case SET_POSTS_FETCHED:
+		return {
+			...state,
+			arePostsFetched: action.arePostsFetched
+		};
 
-		case SET_POSTS:
-			return {
-				...state,
-				posts: action.posts
-			};
+	case SET_POSTS:
+		return {
+			...state,
+			posts: action.posts
+		};
 
-		case SET_POSTS_ERROR:
-			return {
-				...state,
-				error: action.error
-			};
+	case SET_POSTS_ERROR:
+		return {
+			...state,
+			error: action.error
+		};
 
-		default:
-			return state;
+	default:
+		return state;
 	}
 };
 

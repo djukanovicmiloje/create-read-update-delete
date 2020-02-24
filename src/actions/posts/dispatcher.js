@@ -9,7 +9,7 @@ const postsDispatcher = () => dispatch => {
 		})
 		.catch(error => {
 			dispatch(setPostsError(error));
-			dispatch(setPostsLoading(false));
+			dispatch(setPostsFetched(false));
 		});
 };
 

@@ -11,7 +11,9 @@ class SignUpForm extends React.Component {
 			name: '',
 			lastName: '',
 			email: '',
-			password: ''
+			password: '',
+			isPasswordValid: true,
+			isEmailValid: true
 		};
 	}
 
@@ -30,23 +32,40 @@ class SignUpForm extends React.Component {
 			password
 		};
 
-		this.props.signUp(signUpData);
+		const isPasswordValid = this.isPasswordValid();
+		const isEmailValid = this.isEmailValid();
 
-		this.setState({
-			name: '',
-			lastName: '',
-			email: '',
-			password: ''
-		});
+		if (isEmailValid && isPasswordValid) {
+			this.props.signUp(signUpData);
+
+			this.setState({
+				name: '',
+				lastName: '',
+				email: '',
+				password: ''
+			});
+		} else {
+			this.setState({ isPasswordValid, isEmailValid });
+		}
+	}
+
+	isPasswordValid() {
+		const passwordRegex = /^[a-zA-Z0-9]{3,30}$/;
+		return passwordRegex.test(this.state.password);
+	}
+
+	isEmailValid() {
+		const emailRegex = /.+\@.+\..+/;
+		return emailRegex.test(this.state.email);
 	}
 
 	render() {
-		const { name, lastName, email, password } = this.state;
+		const { name, lastName, email, password, isEmailValid, isPasswordValid } = this.state;
 		const { isSignUpPending, isSignUpSuccess, signUpError } = this.props;
 
 		return (
 			<div>
-				{/*isSignUpSuccess && <Redirect to="/posts" />*/}
+				{isSignUpSuccess && <Redirect to="/posts" />}
 				<h1>Sign Up</h1>
 				<input
 					onChange={e => this.onInputChange(e)}
@@ -81,6 +100,13 @@ class SignUpForm extends React.Component {
 				/>
 				<br />
 				<button onClick={() => this.onSignUpClick()}>SignUp</button>
+
+				<div className="message">
+					{!isPasswordValid && (
+						<div>Password must be at least 3 characters long, only letters and digits</div>
+					)}
+					{!isEmailValid && <div>Plese enter a valid email address</div>}
+				</div>
 			</div>
 		);
 	}
